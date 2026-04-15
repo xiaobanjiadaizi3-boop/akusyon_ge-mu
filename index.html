@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>タイムアタック アクションゲーム</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-wrapper">
+        <h1>タイムアタック アクションゲーム</h1>
+        <div class="hud">
+            <div class="hud-item">
+                <span class="label">TIME</span>
+                <span id="time">00:00.000</span>
+            </div>
+            <div class="hud-item">
+                <span class="label">BEST</span>
+                <span id="best">--:--.---</span>
+            </div>
+            <div class="hud-item">
+                <span class="label">DEATHS</span>
+                <span id="deaths">0</span>
+            </div>
+        </div>
+        <div class="canvas-container">
+            <canvas id="game" width="960" height="540"></canvas>
+            <div id="overlay" class="overlay">
+                <div class="overlay-content">
+                    <h2 id="overlay-title">START</h2>
+                    <p id="overlay-message">スペースキーまたはクリックでスタート</p>
+                    <div class="controls">
+                        <div><kbd>A</kbd> / <kbd>D</kbd> 左右移動</div>
+                        <div><kbd>W</kbd> ジャンプ</div>
+                        <div><kbd>S</kbd> しゃがむ</div>
+                        <div><kbd>R</kbd> リスタート</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <button id="restart-btn">リスタート (R)</button>
+            <button id="reset-best-btn">ベスト記録リセット</button>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>

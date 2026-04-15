@@ -1,0 +1,174 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #0b1020;
+    color: #e8ecf4;
+    font-family: "Segoe UI", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+}
+
+.game-wrapper {
+    width: 100%;
+    max-width: 1000px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+    color: #7ee0ff;
+    text-shadow: 0 0 12px rgba(126, 224, 255, 0.6);
+}
+
+.hud {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.hud-item {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(126, 224, 255, 0.3);
+    border-radius: 8px;
+    padding: 8px 16px;
+    min-width: 160px;
+    text-align: center;
+}
+
+.hud-item .label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #7ee0ff;
+    margin-bottom: 4px;
+}
+
+.hud-item span:last-child {
+    font-size: 22px;
+    font-weight: bold;
+    font-family: "Courier New", monospace;
+}
+
+.canvas-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(126, 224, 255, 0.3);
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #1a2138;
+    image-rendering: pixelated;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(11, 16, 32, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.2s ease;
+    backdrop-filter: blur(4px);
+}
+
+.overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.overlay-content {
+    text-align: center;
+    padding: 24px;
+}
+
+.overlay-content h2 {
+    font-size: 48px;
+    color: #7ee0ff;
+    letter-spacing: 6px;
+    margin-bottom: 12px;
+    text-shadow: 0 0 20px rgba(126, 224, 255, 0.7);
+}
+
+.overlay-content p {
+    font-size: 18px;
+    color: #e8ecf4;
+    margin-bottom: 24px;
+}
+
+.controls {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    max-width: 360px;
+    margin: 0 auto;
+    font-size: 14px;
+    color: #b8c1d6;
+}
+
+kbd {
+    display: inline-block;
+    background: #2a3352;
+    border: 1px solid #4a5a85;
+    border-bottom-width: 2px;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    color: #e8ecf4;
+    margin: 0 2px;
+}
+
+.footer {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+button {
+    background: #2a3352;
+    border: 1px solid #4a5a85;
+    color: #e8ecf4;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.15s ease;
+}
+
+button:hover {
+    background: #3a4572;
+    border-color: #7ee0ff;
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+.overlay-content.clear h2 {
+    color: #ffd86b;
+    text-shadow: 0 0 20px rgba(255, 216, 107, 0.7);
+}
+
+.overlay-content.dead h2 {
+    color: #ff6b8b;
+    text-shadow: 0 0 20px rgba(255, 107, 139, 0.7);
+}

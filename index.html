@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>効率最適化型 工場自動化ゲーム</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Factory Flow Optimizer</p>
+      <h1>効率最適化型 工場自動化ゲーム</h1>
+    </div>
+    <div class="speed-panel" aria-label="時間制御">
+      <button class="speed active" data-speed="1">1x</button>
+      <button class="speed" data-speed="2">2x</button>
+      <button class="speed" data-speed="4">4x</button>
+      <button id="pauseBtn">停止</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="panel left-panel">
+      <section>
+        <h2>建設ツール</h2>
+        <div id="toolbox" class="toolbox"></div>
+        <div class="hint">
+          左クリック: 設置 / 右クリック: 削除 / R: 回転<br>
+          ゴースト配置中はコストなしで設計できます。
+        </div>
+      </section>
+
+      <section>
+        <h2>選択中</h2>
+        <div id="selection" class="selection-card"></div>
+      </section>
+
+      <section>
+        <h2>ミッション</h2>
+        <div id="missions" class="mission-list"></div>
+      </section>
+
+      <section>
+        <h2>解放状況</h2>
+        <div id="unlocks" class="unlock-list"></div>
+      </section>
+    </aside>
+
+    <section class="game-stage">
+      <canvas id="game" width="900" height="900" aria-label="50x50 factory grid"></canvas>
+      <div id="hoverTip" class="hover-tip"></div>
+    </section>
+
+    <aside class="panel right-panel">
+      <section>
+        <h2>リアルタイム生産</h2>
+        <div id="score" class="score"></div>
+        <div id="stats" class="stats-grid"></div>
+      </section>
+
+      <section>
+        <h2>ボトルネック検出</h2>
+        <div id="bottlenecks" class="bottleneck-list"></div>
+      </section>
+
+      <section>
+        <h2>設備稼働率</h2>
+        <div id="utilization" class="utilization-list"></div>
+      </section>
+
+      <section>
+        <h2>分析グラフ</h2>
+        <canvas id="chart" width="360" height="140"></canvas>
+        <div id="theory" class="theory"></div>
+      </section>
+
+      <section>
+        <h2>ボトルネック履歴</h2>
+        <div id="history" class="history"></div>
+      </section>
+    </aside>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

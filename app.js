@@ -66,7 +66,7 @@ let lastTime = performance.now();
 let uiTimer = 0;
 let selectedCell = null;
 let hoverCell = null;
-let tickId = 0;
+let gameTime = 0;
 
 const state = {
   grid: [],
@@ -272,7 +272,7 @@ function consumeRecipe(machine, recipe) {
 }
 
 function update(dt) {
-  tickId += 1;
+  gameTime += dt;
   decayTileMetrics(dt);
   updateMachines(dt);
   updateStorages(dt);
@@ -332,8 +332,8 @@ function updateMiner(cell, machine, dt) {
     return;
   }
 
-  machine.progress += dt;
   if (machine.progress < 2) {
+    machine.progress = Math.min(2, machine.progress + dt);
     machine.activeTime += dt;
     machine.lastReason = "採掘中";
     return;
@@ -364,10 +364,12 @@ function updateProcessor(cell, machine, dt) {
     return;
   }
 
-  machine.progress += dt;
-  machine.activeTime += dt;
-  machine.lastReason = "処理中";
-  if (machine.progress < recipe.time) return;
+  if (machine.progress < recipe.time) {
+    machine.progress = Math.min(recipe.time, machine.progress + dt);
+    machine.activeTime += dt;
+    machine.lastReason = "処理中";
+    return;
+  }
 
   const out = outputPos(cell);
   const target = getCell(out.x, out.y);
@@ -435,13 +437,12 @@ function cellFromKey(id) {
 }
 
 function addWindowEvent(window, item, count) {
-  window.push({ t: performance.now() / 1000, item, count });
+  window.push({ t: gameTime, item, count });
 }
 
 function trimWindows() {
-  const now = performance.now() / 1000;
-  state.producedWindow = state.producedWindow.filter((event) => now - event.t <= SAMPLE_SECONDS);
-  state.consumedWindow = state.consumedWindow.filter((event) => now - event.t <= SAMPLE_SECONDS);
+  state.producedWindow = state.producedWindow.filter((event) => gameTime - event.t <= SAMPLE_SECONDS);
+  state.consumedWindow = state.consumedWindow.filter((event) => gameTime - event.t <= SAMPLE_SECONDS);
 }
 
 function ratePerMinute(window, item) {
@@ -816,7 +817,7 @@ function renderSelection() {
     cellHtml = `
       座標 ${cell.x}, ${cell.y}<br>
       タイル: ${cell.type === TILE.empty ? "空き" : tileLabel(cell.type)} ${cell.resource ? `/ 資源 ${cell.resource === TILE.iron ? "鉄" : "銅"}` : ""}<br>
-      状態: ${machine?.lastReason ?? (belt ? `積載 ${belt.items.length}/4` : storage ? `在庫 ${Object.values(storage.items).reduce((a, b) => a + b, 0)}/60` : "通常")}
+      状態: ${machine?.lastReason ?? (belt ? `積載 ${belt.items.length}/${cell.type === TILE.fastBelt ? 6 : 4}` : storage ? `在庫 ${Object.values(storage.items).reduce((a, b) => a + b, 0)}/60` : "通常")}
     `;
   }
   ui.selection.innerHTML = `
@@ -859,11 +860,10 @@ function renderChart() {
 }
 
 function productionSeries(item) {
-  const now = performance.now() / 1000;
   const bins = Array.from({ length: 30 }, () => 0);
   state.producedWindow.forEach((event) => {
     if (event.item !== item) return;
-    const age = now - event.t;
+    const age = gameTime - event.t;
     const index = Math.max(0, Math.min(29, 29 - Math.floor(age / 2)));
     bins[index] += event.count * 30;
   });

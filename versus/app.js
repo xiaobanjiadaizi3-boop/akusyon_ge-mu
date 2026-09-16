@@ -210,14 +210,16 @@ class Coins {
       const l = Math.hypot(a.x, a.y) || 1;
       p.x = clamp(p.x + (a.x / l) * sp * dt, 18, W - 18);
       p.y = clamp(p.y + (a.y / l) * sp * dt, 50, H - 18);
+      let taken = 0;
       this.coins = this.coins.filter((c) => {
         if (dist(p, c) < 28) {
           p.score += c.gold ? 3 : 1;
-          this.spawn();
+          taken++;
           return false;
         }
         return true;
       });
+      for (let k = 0; k < taken; k++) this.spawn();
     });
     if (this.t <= 0) {
       const [a, b] = this.p.map((p) => p.score);

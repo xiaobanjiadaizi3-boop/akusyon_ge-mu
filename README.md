@@ -24,6 +24,16 @@ Mine resources, move them on belts, smelt ore into plates, assemble gears, find 
 - 1x / 2x / 4x speed controls
 - Ghost placement with no build cost
 
+## FPS アスレチックレンジ (`fps/`)
+
+A first-person shooter range built with Three.js. Open `fps/index.html` (through a local server, since it loads ES modules).
+
+- `WASD` move, `Space` jump, `Shift` blink dash (cooldown), `Enter` (or left click) fire, `/` cycle weapons, `1`-`4` direct weapon select, `R` reload
+- 4 weapons: pistol / assault rifle / shotgun / sniper, each with its own fire rate, spread, magazine and recoil
+- Crates, pillars, stairs, floating platform chain, catwalks and jump pads form a parkour course
+- Static, patrolling and pop-up dummies with head/body hitboxes, damage numbers in the feed, and respawn after a few seconds
+- HUD: score, kills, accuracy, ammo, blink cooldown, hit markers
+
 ## Local preview
 
 The game is a static site. Any local static server works:

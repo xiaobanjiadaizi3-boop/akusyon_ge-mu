@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "python3 -m http.server 8000",
-    "lint": "node --check app.js",
-    "test": "node --check app.js"
+    "lint": "node --check app.js && node --check versus/app.js",
+    "test": "node --check app.js && node --check versus/app.js"
   }
 }

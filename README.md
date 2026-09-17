@@ -24,6 +24,22 @@ Mine resources, move them on belts, smelt ore into plates, assemble gears, find 
 - 1x / 2x / 4x speed controls
 - Ghost placement with no build cost
 
+## Keyboard Duel (1vs1 ミニゲーム集)
+
+`versus/index.html` に、同じキーボードで対戦する1vs1ミニゲーム集があります。
+P1 は `WASD`、P2 は `↑↓←→` で操作します。メニューで `1`-`6` またはW/S・↑/↓で選び、`Space` で開始、`Esc` でメニューへ戻ります。
+
+| # | ゲーム | ルール |
+|---|---|---|
+| 1 | 相撲 | 相手を土俵の外へ押し出す |
+| 2 | ライトサイクル | 壁や軌跡に当たったら負け |
+| 3 | コイン集め | 30秒でより多くコインを集める（金コインは3点） |
+| 4 | 鬼ごっこ | 接触で鬼が交代。鬼だった時間が短いほうが勝ち |
+| 5 | 弾よけ | 降ってくる弾を避けて最後まで生き残る |
+| 6 | 陣取り | 30秒で多くのマスを自分の色に塗る |
+
+勝敗は画面上部のスコアボードに累積されます。
+
 ## Local preview
 
 The game is a static site. Any local static server works:
@@ -32,4 +48,4 @@ The game is a static site. Any local static server works:
 python3 -m http.server 8000
 ```
 
-Then open `http://localhost:8000` in a browser.
+Then open `http://localhost:8000` in a browser (factory game) or `http://localhost:8000/versus/` (1vs1 minigames).
